@@ -818,10 +818,11 @@ drawbar(Monitor *m)
 			if (i > 0)
 				mw += ew / i;
 
+			tw -= 2 * sp - vertpad;
 			for (c = m->clients; c; c = c->next) {
 				if (!ISVISIBLE(c))
 					continue;
-				tw = MIN(m->sel == c ? w : mw, TEXTW(c->name));
+				tw = MIN(m->sel == c ? w - 2 * sp - vertpad : mw, TEXTW(c->name));
 
 				drw_setscheme(drw, scheme[m->sel == c ? SchemeSel : SchemeNorm]);
 				if (tw > 0) /* trap special handling of 0 in drw_text */
@@ -833,7 +834,7 @@ drawbar(Monitor *m)
 			}
 		}
 		drw_setscheme(drw, scheme[SchemeNorm]);
-		drw_rect(drw, x, 0, w - 2 * sp - 10, bh, 1, 1);
+		drw_rect(drw, x, 0, w - 2 * sp, bh, 1, 1);
 	}
 	drw_map(drw, m->barwin, 0, 0, m->ww, bh);
 }
