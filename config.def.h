@@ -3,14 +3,14 @@
 #include <X11/XF86keysym.h>
 
 /* appearance */
-static const unsigned int borderpx  = 1;        /* border pixel of windows */
+static const unsigned int borderpx  = 0;        /* border pixel of windows */
 static const unsigned int gappx     = 18;       /* gap pixel between windows */
-static const unsigned int snap      = 32;       /* snap pixel */
+static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
 static const int horizpadbar        = 12;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 12;        /* vertical padding for statusbar */
-static const char *fonts[]          = { "Iosevka Nerd Font:size=11:antialias=true:autohint=true" };
+static const char *fonts[]          = {"Iosevka:size=12", "Font Awesome 5 Free Solid:size=12" };
 
 static const char norm_fg[] = "#d0c9be";
 static const char norm_bg[] = "#18140d";
@@ -72,6 +72,11 @@ static char dmenumon[2] = "0"; /* component of dmenucmd, manipulated in spawn() 
 static const char *dmenucmd[] = { "dmenu_run", NULL };
 static const char *termcmd[]  = { "alacritty", NULL };
 
+static const char *uslang[] = {"/home/cigla/.bin/keyboard.sh", "us", NULL};
+static const char *rslang[] = {"/home/cigla/.bin/keyboard.sh", "rs", NULL};
+static const char *rsltnlang[] = {"/home/cigla/.bin/keyboard.sh", "rs@latin", NULL};
+static const char *langchoose[] = {"/home/cigla/.bin/dmenu/xkbchoose.sh", NULL};
+
 static const char *upvol[]   = { "/home/cigla/.bin/volup.sh",         NULL };
 static const char *downvol[] = { "/home/cigla/.bin/voldown.sh",       NULL };
 static const char *mutevol[] = { "/home/cigla/.bin/volmute.sh",       NULL };
@@ -83,9 +88,15 @@ static Key keys[] = {
 	/* modifier                     key        function        argument */
 	{ MODKEY,                       XK_d,      spawn,          {.v = dmenucmd } },
 	{ MODKEY,                       XK_Return, spawn,          {.v = termcmd } },
+	{ MODKEY|ShiftMask,             XK_F1,     spawn,          {.v = uslang } },
+	{ MODKEY|ShiftMask,             XK_F2,     spawn,          {.v = rslang } },
+	{ MODKEY|ShiftMask,             XK_F3,     spawn,          {.v = rsltnlang } },
+	{ MODKEY|ShiftMask,             XK_F4,     spawn,          {.v = langchoose } },
 	{ 0,              XF86XK_AudioLowerVolume, spawn,          {.v = downvol } },
 	{ 0,                     XF86XK_AudioMute, spawn,          {.v = mutevol } },
-	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol   } },
+	{ 0,              XF86XK_AudioRaiseVolume, spawn,          {.v = upvol } },
+	{ 0,               XF86XK_MonBrightnessUp, spawn,          {.v = upbright } },
+	{ 0,             XF86XK_MonBrightnessDown, spawn,          {.v = downbright } },
 	{ MODKEY,                       XK_b,      togglebar,      {0} },
 	{ MODKEY,                       XK_j,      focusstack,     {.i = +1 } },
 	{ MODKEY,                       XK_k,      focusstack,     {.i = -1 } },
@@ -132,9 +143,7 @@ static Button buttons[] = {
 	{ ClkLtSymbol,          0,              Button1,        setlayout,      {0} },
 	{ ClkLtSymbol,          0,              Button3,        setlayout,      {.v = &layouts[2]} },
 	{ ClkWinTitle,          0,              Button2,        zoom,           {0} },
-	{ ClkStatusText,        0,              Button1,        sigdwmblocks,   {.i = 1} },
-	{ ClkStatusText,        0,              Button2,        sigdwmblocks,   {.i = 2} },
-	{ ClkStatusText,        0,              Button3,        sigdwmblocks,   {.i = 3} },
+	{ ClkStatusText,        0,              Button2,        spawn,          {.v = termcmd } },
 	{ ClkClientWin,         MODKEY,         Button1,        movemouse,      {0} },
 	{ ClkClientWin,         MODKEY,         Button2,        togglefloating, {0} },
 	{ ClkClientWin,         MODKEY,         Button3,        resizemouse,    {0} },
