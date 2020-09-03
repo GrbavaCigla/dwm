@@ -8,6 +8,8 @@ static const unsigned int gappx     = 18;       /* gap pixel between windows */
 static const unsigned int snap      = 16;       /* snap pixel */
 static const int showbar            = 1;        /* 0 means no bar */
 static const int topbar             = 1;        /* 0 means bottom bar */
+static const int vertpad            = 10;       /* vertical padding of bar */
+static const int sidepad            = 10;       /* horizontal padding of bar */
 static const int horizpadbar        = 12;        /* horizontal padding for statusbar */
 static const int vertpadbar         = 12;        /* vertical padding for statusbar */
 static const char *fonts[]          = {"Iosevka:size=12", "Font Awesome 5 Free Solid:size=12" };
