@@ -45,6 +45,7 @@ and (re)compiling the source code.
 ## Screenshots
 
 ![DWM](https://i.imgur.com/FAX43KR.jpg)
+![Reddit post](https://preview.redd.it/qrlyqlzuke161.png?width=640&crop=smart&auto=webp&s=d29295c039e5123ad804cd90c25c59882468202d)
 
 ## Patches applied
 
