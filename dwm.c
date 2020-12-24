@@ -818,7 +818,7 @@ drawbar(Monitor *m)
 			if (i > 0)
 				mw += ew / i;
 
-			tw -= 2 * sp - vertpad;
+			tw -= 2 * sp;
 			for (c = m->clients; c; c = c->next) {
 				if (!ISVISIBLE(c))
 					continue;
@@ -826,7 +826,7 @@ drawbar(Monitor *m)
 
 				drw_setscheme(drw, scheme[m->sel == c ? SchemeSel : SchemeNorm]);
 				if (tw > 0) /* trap special handling of 0 in drw_text */
-					drw_text(drw, x, 0, tw - 2 * sp - vertpad, bh, lrpad / 2, c->name, 0);
+					drw_text(drw, x, 0, tw, bh, lrpad / 2, c->name, 0);
 				if (c->isfloating)
 					drw_rect(drw, x + boxs, boxs, boxw, boxw, c->isfixed, 0);
 				x += tw;
